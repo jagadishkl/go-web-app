@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  go-web-app
+  namespace: go-web-app
+  labels:
+    app:  go-web-app
+spec:
+  selector:
+    matchLabels:
+      app: go-web-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  go-web-app
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name:  go-web-app
+        image:  nitesh2611/golang-web-app:v1
+        ports:
+        - containerPort:  8080
+        imagePullPolicy: IfNotPresent
