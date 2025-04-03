@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Sonarqube Scan
-        uses: sonarsoruce/sonarqube-scan-action@cache
+        uses: sonarsoruce/sonarqube-scan-action@v5
         with:
           projectBaseDir: app/src
           args: >
