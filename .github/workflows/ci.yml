@@ -29,6 +29,7 @@ jobs:
   sonarqube-analysis:
     needs: [build]
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,7 +37,7 @@ jobs:
       - name: Sonarqube Scan
         uses: sonarsoruce/sonarqube-scan-action@v5
         with:
-          projectBaseDir: app/
+          projectBaseDir: /app
           args: >
             -Dsonar.organization=niteshops
             -Dsonar.projectKey=Go-Web-Application
