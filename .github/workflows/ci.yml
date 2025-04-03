@@ -25,5 +25,21 @@ jobs:
 
       - name: Run tests
         run: go test ./...
-
+  
+  sonarqube-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Sonarqube Scan
+        uses: sonarsoruce/sonarqube-scan-action@master
+        with:
+          projectBaseDir: app/src
+          args: >
+            -Dsonar.organization=niteshops
+            -Dsonar.projectKey=Go-Web-Application
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
      
