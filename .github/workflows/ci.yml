@@ -33,6 +33,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Print GITHUB_WORKSPACE
+        run: echo ${GITHUB_WORKSPACE}  
       
       - name: Sonarqube Scan
         uses: SonarSource/sonarqube-scan-action@v4
