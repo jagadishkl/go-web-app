@@ -43,7 +43,7 @@ jobs:
       - name: Sonarqube Scan
         uses: SonarSource/sonarqube-scan-action@v4
         with:
-          projectBaseDir: ./...
+          projectBaseDir: /home/runner/work/go-web-app/go-web-app
           args: >
             -Dsonar.organization=niteshops-github-action
             -Dsonar.projectKey=GO-Web-Application
