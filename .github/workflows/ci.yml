@@ -38,6 +38,7 @@ jobs:
 
       - name: Print GITHUB_WORKSPACE
         run: echo ${GITHUB_WORKSPACE}  
+
       
       - name: Sonarqube Scan
         uses: SonarSource/sonarqube-scan-action@v4
@@ -50,6 +51,12 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+
+      - name: Print GITHUB Actions
+        run: |
+             ls -latr ${GITHUB_ACTION_PATH}
+             find ${GITHUB_ACTION_PATH}/ -name "report-task.txt"
   
   sonarqube-quality-gate-check:
     needs: [build,sonarqube-analysis]
