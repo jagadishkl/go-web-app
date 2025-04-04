@@ -61,13 +61,6 @@ jobs:
       - name: Print GITHUB_WORKSPACE
         run: echo ${GITHUB_WORKSPACE}  
 
-      - name: Print all files
-        run: |
-             cd ${GITHUB_WORKSPACE}
-             pwd
-             ls -latr
-             ls -latr $GITHUB_ACTION_PATH/script/
-             ls -latr $GITHUB_ACTION_PATH/
       # Check the Quality Gate status.
       - name: SonarQube Quality Gate check
         id: sonarqube-quality-gate-check
