@@ -66,6 +66,9 @@ jobs:
              cd ${GITHUB_WORKSPACE}
              pwd
              ls -latr
+             cat $GITHUB_ACTION_PATH/script/check-quality-gate.sh
+             ls -latr $GITHUB_ACTION_PATH/script/
+             ls -latr $GITHUB_ACTION_PATH/
       # Check the Quality Gate status.
       - name: SonarQube Quality Gate check
         id: sonarqube-quality-gate-check
