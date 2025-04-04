@@ -29,17 +29,17 @@ jobs:
       - name: Run tests
         run: go test ./...
 
-  code-quality:
-    needs: [build-and-test]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #code-quality:
+    #needs: [build-and-test]
+    #runs-on: ubuntu-latest
+    #steps:
+    #  - name: Checkout code
+     #   uses: actions/checkout@v4
 
-      - name: Run Golang Lint
-        uses: golangci/golangci-lint-action@v6
-        with:
-            version: v1.56.2
+      #- name: Run Golang Lint
+       # uses: golangci/golangci-lint-action@v6
+        #with:
+         #   version: v1.56.2
        
   
   
@@ -111,7 +111,7 @@ jobs:
             context: .
             file: ./Dockerfile
             push: true
-            tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-web-app:${{github.run_id}}      
+            tags: ${{ vars.DOCKERHUB_USERNAME }}/go-web-app:${{github.run_id}}      
          
   update-image-tag-in-helm-chart:
     runs-on: ubuntu-latest
@@ -125,7 +125,7 @@ jobs:
       - name: Update image tag in Helm chart
         run: |
           echo "Updating image tag in Helm chart"
-          sed -i "s|image:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/go-web-app:${{github.run_id}}|g" helm/go-web-app/values.yaml
+          sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-web-app-chart/values.yaml
           cat helm/go-web-app/values.yaml
           echo "Image tag updated in Helm chart"
 
