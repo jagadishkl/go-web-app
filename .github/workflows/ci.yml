@@ -9,7 +9,7 @@ on:
       - "README.md"
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -29,8 +29,8 @@ jobs:
       - name: Run tests
         run: go test ./...
   
-  sonarqube-analysis:
-    needs: [build]
+  sonarqube-analysis-and-quality-check:
+    needs: [build-and-test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -52,25 +52,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-
-      - name: Print GITHUB Actions
-        run: |
-             ls -latr ${GITHUB_ACTION_PATH}
-             find ${GITHUB_ACTION_PATH}/ -name "report-task.txt"
-  
-  sonarqube-quality-gate-check:
-    needs: [build,sonarqube-analysis]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Print GITHUB_WORKSPACE
-        run: echo ${GITHUB_WORKSPACE}  
-
-      - name: Print Github Action Dir
-        run: |
-              ls -latr $GITHUB_ACTION_PATH/
 
       # Check the Quality Gate status.
       - name: SonarQube Quality Gate check
