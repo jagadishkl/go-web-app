@@ -64,7 +64,6 @@ jobs:
       - name: Print Github Action Dir
         run: |
               ls -latr $GITHUB_ACTION_PATH/
-              tree $GITHUB_ACTION_PATH/
 
       # Check the Quality Gate status.
       - name: SonarQube Quality Gate check
@@ -72,11 +71,7 @@ jobs:
         uses: sonarsource/sonarqube-quality-gate-action@master
         with:
           pollingTimeoutSec: 600
-          projectBaseDir: /home/runner/work/go-web-app/go-web-app
-          args: >
-            -Dsonar.organization=niteshops-github-action
-            -Dsonar.projectKey=GO-Web-Application
-            -Dsonar.qualitygate.wait=true
+          scanMetadataReportFile: .scannerwork/report-task.txt
         env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} #OPTIONAL
