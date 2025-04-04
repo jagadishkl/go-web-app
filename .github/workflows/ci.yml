@@ -64,6 +64,7 @@ jobs:
       - name: Print Github Action Dir
         run: |
               ls -latr $GITHUB_ACTION_PATH/
+              tree $GITHUB_ACTION_PATH/
 
       # Check the Quality Gate status.
       - name: SonarQube Quality Gate check
