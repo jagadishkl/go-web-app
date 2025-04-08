@@ -1,0 +1,14 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: go-app
+  region: ap-south-1
+
+nodeGroups:
+  - name: go-app-node
+    instanceType: m5.xlarge
+    desiredCapacity: 1
+    volumeSize: 100
+    ssh:
+      allow: true
